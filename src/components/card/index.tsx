@@ -1,14 +1,6 @@
 import { Flex, Image } from "@chakra-ui/react";
 import { FC } from "react";
 
-interface ICard {
-  handleFormView: (url: string) => void;
-  NFTe: {
-    image_path: string;
-    id: string;
-  };
-}
-
 const Card: FC<ICard> = ({ NFTe, handleFormView }) => {
   const { image_path, id } = NFTe;
   return (

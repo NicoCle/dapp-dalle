@@ -12,7 +12,7 @@ const useMarket = () => {
   };
 
   const handleGerenate = useCallback(async () => {
-    const data = await fetcher("/api/hello");
+    const data = await fetcher("/api/dalle");
     return setImagesList(data?.data.result);
   }, []);
 

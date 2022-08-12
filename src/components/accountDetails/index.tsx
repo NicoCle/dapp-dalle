@@ -2,15 +2,7 @@ import { Flex, Heading, Button, Text } from "@chakra-ui/react";
 import { FC } from "react";
 import { motion } from "framer-motion";
 
-interface IAccount {
-  active: boolean;
-  connect: () => void;
-  disconnect: () => void;
-  account: string | null | undefined;
-  chain: string | undefined;
-  ChainId: number | undefined;
-}
-const Account: FC<IAccount> = ({
+const AccountDetails: FC<IAccountDetails> = ({
   active,
   connect,
   disconnect,
@@ -65,4 +57,4 @@ const Account: FC<IAccount> = ({
   );
 };
 
-export default Account;
+export default AccountDetails;

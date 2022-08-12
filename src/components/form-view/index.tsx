@@ -11,12 +11,6 @@ import { Formik, Field } from "formik";
 import { FC } from "react";
 import { useHook } from "./hooks";
 
-interface IFormView {
-  src: string;
-  closeForm: () => void;
-  account: string | null | undefined;
-}
-
 const FormView: FC<IFormView> = ({ closeForm, src, account }) => {
   const { initialValues } = useHook();
 
@@ -47,7 +41,7 @@ const FormView: FC<IFormView> = ({ closeForm, src, account }) => {
                 name="owner"
                 type="owner"
                 variant="flushed"
-                placeholder={account}
+                placeholder="tokenId"
                 disabled={true}
               />
             </FormControl>
@@ -91,16 +85,7 @@ const FormView: FC<IFormView> = ({ closeForm, src, account }) => {
                 variant="flushed"
               />
             </FormControl>
-            <FormControl>
-              <FormLabel htmlFor="attributes">attributes</FormLabel>
-              <Field
-                as={Input}
-                id="attributes"
-                name="attributes"
-                type="attributes"
-                variant="flushed"
-              />
-            </FormControl>
+
             <Button type="submit" colorScheme="yellow">
               Buy NFT
             </Button>

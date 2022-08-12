@@ -1,6 +1,7 @@
 // Oh you curious...
 // This is not a real database,
 // But let's imagine it is one :)
+
 import allData from "./data";
 
 class Database {
@@ -10,16 +11,6 @@ class Database {
     const asArray = Object.values(allData);
     await randomDelay();
     return asArray;
-  }
-
-  async getById(id: string) {
-    if (!Object.prototype.hasOwnProperty.call(allData, id)) {
-      return null;
-    }
-
-    const entry = allData[id];
-    await randomDelay();
-    return entry;
   }
 }
 

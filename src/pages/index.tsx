@@ -1,6 +1,6 @@
 import { Button, Flex, Heading, Skeleton, Input } from "@chakra-ui/react";
 import type { NextPage } from "next";
-import Account from "components/accountDetails";
+import AccountDetails from "components/accountDetails";
 import Card from "components/card";
 import FormView from "components/form-view";
 import useMarket from "hook/useMarket";
@@ -21,7 +21,7 @@ const HomePage: NextPage = () => {
       alignItems="center"
       justifyContent="space-around"
     >
-      <Account
+      <AccountDetails
         chain={chain?.[0]?.chain}
         ChainId={chainId}
         active={active}
