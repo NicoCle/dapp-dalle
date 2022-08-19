@@ -1,69 +1,59 @@
-import { Button, Flex, Heading, Skeleton, Input } from "@chakra-ui/react";
+import { Flex } from "@chakra-ui/react";
 import type { NextPage } from "next";
-import AccountDetails from "components/accountDetails";
+import AccountDetails from "components/wallet";
 import Card from "components/card";
 import FormView from "components/form-view";
-import useMarket from "hook/useMarket";
+import Nav from "components/Nav";
+import TitleContainer from "components/titleContainer";
+import InputGenerate from "components/inputGenerate";
+import useMock from "hook/useMock";
 import useWallet from "hook/useWallet";
+import useDalle from "hook/useDalle";
 
 const HomePage: NextPage = () => {
-  const { connect, disconnect, account, active, chainId, chain } = useWallet();
-  const { imgesList, src, closeForm, openForm, handleGerenate } = useMarket();
+  const { connect, disconnect, account, active, chain, isUnsupportedChain } =
+    useWallet();
+  const { setQuery } = useDalle();
+  const { imgesList, src, openForm, handleGerenate } = useMock();
 
   return (
     <Flex
       w="100%"
       minH="100vh"
       direction="column"
-      bg="black"
-      color="blue.500"
-      padding="5rem 2rem"
+      bg="orange.200"
+      color="black"
       alignItems="center"
       justifyContent="space-around"
     >
+      <Nav />
       <AccountDetails
         chain={chain?.[0]?.chain}
-        ChainId={chainId}
+        isUnsupportedChain={isUnsupportedChain}
         active={active}
         connect={connect}
         disconnect={disconnect}
         account={account}
       />
-      <Heading fontSize="8xl" textAlign="center">
-        Crea tu primer NFT
-      </Heading>
-      <Flex width="100%" justifyContent="center">
-        <Flex
-          boxSize="md"
-          direction="column"
-          justifyContent="center"
-          alignItems="center"
-        >
-          <Heading>Ingresar texto :</Heading>
-          <Flex gap="1rem">
-            <Input bg="white" />
-            <Button colorScheme="pink" onClick={handleGerenate}>
-              Generar
-            </Button>
-          </Flex>
-        </Flex>
-      </Flex>
+      <TitleContainer />
+      <InputGenerate setQuery={setQuery} handleGerenate={handleGerenate} />
       <Flex
-        gap="1rem"
-        padding="1rem"
-        borderRadius="lg"
-        justifyContent="center"
-        border="1px solid black"
         w="100%"
-        minH="250px"
+        minH="70vh"
+        bg="blue.200"
+        justifyContent="center"
+        alignItems="center"
+        gap="1rem"
+        p="1rem"
+        wrap="wrap"
       >
-        {imgesList.map((e: any) => {
-          return <Card NFTe={e} key={e.id} handleFormView={openForm} />;
+        {imgesList.map((data: TData) => {
+          return (
+            <Card dalleData={data} key={data.id} handleFormView={openForm} />
+          );
         })}
       </Flex>
-      {src ? (
-        <FormView account={account} src={src} closeForm={closeForm} />
-      ) : null}
+      <FormView account={account} src={src} />
     </Flex>
   );
 };

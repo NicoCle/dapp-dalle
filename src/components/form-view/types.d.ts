@@ -1,5 +1,10 @@
 interface IFormView {
   src: string;
-  closeForm: () => void;
   account: string | null | undefined;
 }
+type TValue = {
+  name: string;
+  image: string;
+  description: string;
+  attributes: any;
+};

@@ -1,16 +1,17 @@
 import { useCallback, useState } from "react";
 
 const useDalle = () => {
-  const [token, setToken] = useState("");
+  const token = process.env.TOKEN_KEY;
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
+  const [error, setError] = useState(false);
 
-  const getDalle = useCallback(async () => {
-    if (token != "" && query != "") {
+  const getDalle = useCallback(() => {
+    if (query != "") {
+      setError(false);
       setLoading(true);
-      await fetch(`/api/dalle?k=${token}&q=${query}`, {
+      fetch(`/api/dalle?k=${token}&q=${query}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -18,18 +19,19 @@ const useDalle = () => {
       })
         .then((res) => res.json())
         .then((data) => {
-          setResults(data.result);
+          setResults(data.result.data);
           setLoading(false);
         })
         .catch((err) => {
+          console.log(err);
           setLoading(false);
-          setError(err);
+          setError(false);
         });
     } else {
-      setError("Ingrese la frase");
+      setError(true);
     }
   }, [token, query]);
 
-  return { setToken, setQuery, getDalle, results, loading, error };
+  return { setQuery, getDalle, results, loading, error };
 };
 export default useDalle;

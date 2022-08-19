@@ -1,16 +1,19 @@
 import { Flex, Image } from "@chakra-ui/react";
 import { FC } from "react";
 
-const Card: FC<ICard> = ({ NFTe, handleFormView }) => {
-  const { image_path, id } = NFTe;
+const Card: FC<ICard> = ({ dalleData, handleFormView }) => {
   return (
     <Flex
       w="250px"
-      h="250px"
-      bg="green"
-      onClick={() => handleFormView(image_path)}
+      h="300px"
+      border="5px solid black"
+      borderColor="green.700"
+      onClick={() => handleFormView(dalleData?.image_path)}
     >
-      <Image src={image_path} alt={`/image/${id}`} />
+      <Image
+        src={dalleData?.image_path}
+        alt={`/image/${dalleData?.image_path}`}
+      />
     </Flex>
   );
 };
